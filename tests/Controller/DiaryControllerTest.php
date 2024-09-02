@@ -34,4 +34,60 @@ class DiaryControllerTest extends WebTestCase
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
+
+    public function testDiaryIsUp()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('diary'));
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+    }
+
+    public function testAddNewRecordIsUp()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('add-new-record'));
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+    }
+
+    public function testDeleteRecordIsUp()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('delete-record'));
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+    }
+
+    public function testCaloriesStatusIsUp()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('calories-status'));
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+    }
+
+    public function testGithubConnectIsUp()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('github_connect'));
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+    }
+
+    public function testGithubRedirectUrlIsUp()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('github_redirect_url'));
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+    }
+
+    public function testAppLoginIsUp()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('app_login'));
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+    }
+
+    public function testAppLogoutIsUp()
+    {
+        $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('app_logout'));
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+    }
 }
