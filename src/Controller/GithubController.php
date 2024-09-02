@@ -12,15 +12,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class GithubController extends AbstractController
 {
     #[Route(path: '/connect/github', name: 'github_connect')]
-    public function connectAction(ClientRegistry $clientRegistry) : RedirectResponse
+    public function connectAction(ClientRegistry $clientRegistry): RedirectResponse
     {
         $client = $clientRegistry->getClient('github');
-        return $client->redirect(['user:email', 'read:user']);
+        return $client->redirect(['user:email', 'read:user'], []);
     }
 
     #[Route(path: '/connect/github/check', name: 'github_redirect_url')]
-    public function connectCheckAction(Request $request, ClientRegistry $clientRegistry)
-    {
-
-    }
+    public function connectCheckAction(Request $request, ClientRegistry $clientRegistry) {}
 }

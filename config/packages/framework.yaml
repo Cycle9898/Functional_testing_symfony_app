@@ -1,6 +1,6 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
-    secret: '%env(APP_SECRET)%'
+    secret: "%env(APP_SECRET)%"
     #csrf_protection: true
     http_method_override: false
 
@@ -17,7 +17,7 @@ framework:
     php_errors:
         log: true
 
-when@test:
+when@testing:
     framework:
         test: true
         session:
