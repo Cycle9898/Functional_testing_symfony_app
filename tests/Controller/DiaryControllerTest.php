@@ -28,6 +28,8 @@ class DiaryControllerTest extends WebTestCase
         $this->client->loginUser($this->user);
     }
 
+    /* Status code page tests */
+
     public function testHomepageIsUp()
     {
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
@@ -89,5 +91,14 @@ class DiaryControllerTest extends WebTestCase
         $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('app_logout'));
 
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+    }
+
+    /* Homepage tests */
+
+    public function testHomepageH1()
+    {
+        $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
+
+        $this->assertSame(1, $crawler->filter('h1')->count());
     }
 }
