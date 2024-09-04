@@ -101,4 +101,19 @@ class DiaryControllerTest extends WebTestCase
 
         $this->assertSame(1, $crawler->filter('h1')->count());
     }
+
+    /* Form test */
+
+    public function testAddRecord()
+    {
+        $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('add-new-record'));
+
+        $form = $crawler->selectButton('Enregistrer')->form();
+        $form['food[entitled]'] = 'Plat de spaghetti';
+        $form['food[calories]'] = 785;
+        $this->client->submit($form);
+        $this->client->followRedirect();
+
+        $this->assertSelectorTextContains('div.alert.alert-success', 'Ajouter une nouvelle entrée.');
+    }
 }
