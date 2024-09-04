@@ -93,13 +93,26 @@ class DiaryControllerTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
 
-    /* Homepage tests */
+    /* Page tests */
 
     public function testHomepageH1()
     {
         $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('homepage'));
 
         $this->assertSame(1, $crawler->filter('h1')->count());
+    }
+
+    public function testList()
+    {
+        $crawler = $this->client->request(Request::METHOD_GET, $this->urlGenerator->generate('diary'));
+        $link = $crawler->selectLink('Voir tous les rapports')->link();
+        $crawler = $this->client->click($link);
+
+        $info = $crawler->filter('h1')->text();
+        // format text
+        $info = trim(preg_replace('/\s\s+/', '', $info));
+
+        $this->assertSame('Tous les rapports Tout ce qui a été mangé !', $info);
     }
 
     /* Form test */
